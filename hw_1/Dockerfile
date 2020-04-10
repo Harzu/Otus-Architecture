@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 go build -installsuffix 'static' -o /bin/hw_1
 
 FROM alpine:3.9 as production
 
-RUN apk add ca-certificates
+RUN apk --no-cache add ca-certificates
 COPY --from=builder /bin/hw_1 /bin/hw_1
 
 ENTRYPOINT ["/bin/hw_1"]
