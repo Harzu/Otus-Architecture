@@ -9,5 +9,5 @@ docker build -t hw_1 .
 
 ### Run
 ```bash
-docker run -p 8080:8080 hw_1:latest
+docker run -p 8000:8000 fanyshu/otus-arch-hw-1
 ```
