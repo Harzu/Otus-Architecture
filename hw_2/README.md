@@ -4,6 +4,7 @@
 ```bash
 brew install minicube
 brew install kubectl
+brew install watch
 ```
 
 ## Run minikube
@@ -54,4 +55,9 @@ kubectl describe pod/homework-2
 ## Stop and delete pod
 ```bash
 kubectl delete pod homework-2
+```
+
+## Enable nginx-ingress
+```bash
+minikube addons enable ingress
 ```

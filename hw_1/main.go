@@ -1,8 +1,8 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
 
 type HealthCheck struct {
@@ -10,8 +10,14 @@ type HealthCheck struct {
 }
 
 func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		if _, err := w.Write([]byte("Hello world")); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
 	http.HandleFunc("/health", func(w http.ResponseWriter, req *http.Request) {
-		data := &HealthCheck{Status:"OK"}
+		data := &HealthCheck{Status: "OK"}
 		response, err := json.Marshal(data)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

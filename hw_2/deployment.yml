@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: my-app-deployment
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+      
+  template:
+    metadata:
+      labels:
+        app: my-app
+      
+    spec:
+      containers:
+      - name: my-app
+        image: fanyshu/otus-arch-hw-1:v2
+        ports:
+        - name: web
+          containerPort: 8000
+          
+        livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            timeoutSeconds: 3
+          
+        readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 4
+            periodSeconds: 3
