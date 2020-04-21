@@ -1,0 +1,126 @@
+swagger: "2.0"
+info:
+  title: Otus-Arch-homework
+  description: Otus architecture homework 3
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get users list
+      operationId: UserList
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      responses:
+        200:
+          description: Users list
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/UserProperties"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/FailResponse"
+    post:
+      summary: Create new user
+      operationId: CreateUser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: New user params
+          schema:
+            $ref: "#/definitions/UserProperties"
+      responses:
+        201:
+          description: User created
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/FailResponse"
+    put:
+      summary: Update user
+      operationId: UpdateUser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: User params
+          schema:
+            $ref: "#/definitions/UserProperties"
+      responses:
+        201:
+          description: User updated
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/FailResponse"
+    delete:
+      summary: Delete users
+      operationId: DeleteUser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            description: User emails
+            items:
+              type: string
+              minLength: 1
+      responses:
+        200:
+          description: Users deleted
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/FailResponse"
+
+definitions:
+  UserProperties:
+    type: object
+    description: User info
+    required:
+      - email
+      - firstName
+      - lastName
+      - passwordHash
+    properties:
+      email:
+        type: string
+        minLength: 1
+        description: User email address
+      firstName:
+        type: string
+        description: User first name
+      lastName:
+        type: string
+        description: User last name
+      passwordHash:
+        type: string
+        description: User password hash
+
+  FailResponse:
+    description: Error response
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: string
+        minLength: 1
+        description: Error message
