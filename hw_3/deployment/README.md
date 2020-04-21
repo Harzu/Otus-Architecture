@@ -1,5 +1,9 @@
 # Homework run
 
+# Kubectl
+
+In first. go to **./kube** directory
+
 Run all services
 ```bash
 kubectl apply -f .
@@ -22,3 +26,27 @@ kubectl get ingress
 
 add ingress ip and 80 port to postman environment **KUBE_HOST**
 Run test collection
+
+# Helm
+
+go to **./service-chart** directory
+
+Update dependencies
+```bash
+helm dependency update .
+```
+
+Dry run for check
+```bash
+helm install myapp . --dry-run
+```
+
+if not errors run app with command
+```bash
+helm install myapp .
+```
+
+For close app use command
+```bash
+helm uninstall myapp
+```

@@ -7,7 +7,8 @@ metadata:
 spec:
   selector:
     app: my-app
+
+  type: NodePort
   ports:
     - port: 8000
       targetPort: web
-  type: NodePort

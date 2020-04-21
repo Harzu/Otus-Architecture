@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-db
+spec:
+  template:
+    metadata:
+      name: init-db
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: post-install-job
+          env:
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: DB_URI
+                  name: app-secret
+          image: postgres:latest
+          command:
+            - sh
+            - "-c"
+            - |
+              psql $DB_URI <<'EOF'
+                create table users (
+                    email text primary key,
+                    password_hash text not null,
+                    first_name text default '',
+                    last_name text default ''
+                );
+              EOF
+  backoffLimit: 3
