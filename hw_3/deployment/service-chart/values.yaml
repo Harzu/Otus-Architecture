@@ -10,7 +10,7 @@ service:
 
 ingress:
   enabled: true
-  host: "my.app"
+  host: "otus-hw-3.test"
   pathexp: "/otusapp(/|$)(.*)"
 
 postgresql:

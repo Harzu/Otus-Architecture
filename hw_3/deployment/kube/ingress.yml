@@ -8,7 +8,7 @@ metadata:
 
 spec:
   rules:
-    - host: my.app
+    - host: otus-hw-3.test
       http:
         paths:
           - backend:
