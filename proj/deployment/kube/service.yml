@@ -8,8 +8,7 @@ spec:
   selector:
     app: my-app
 
-  ports:
-  - port: 8000
-    targetPort: web
   type: NodePort
-  
+  ports:
+    - port: 8000
+      targetPort: web

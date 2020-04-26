@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-job
+spec:
+  template:
+    metadata:
+      name: load-job
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: post-install-job
+          image: httpd:latest
+          command:
+            - sh
+            - "-c"
+            - |
+              while true
+              do
+              ab -n 20 -c 5 http://192.168.64.2:31871/users
+              sleep 3
+              done
+  backoffLimit: 3

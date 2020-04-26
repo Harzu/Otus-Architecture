@@ -12,6 +12,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: my-app-service
+          serviceName: my-app-services
           servicePort: 8000
         path: /otusapp(/|$)(.*)
