@@ -59,3 +59,27 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com
 helm repo update
 helm install prom stable/prometheus-operator -f ./prometheus.yml --atomic
 ```
+
+# Nginx-ingress
+```bash
+helm install nginx stable/nginx-ingress -f ./nginx-ingress.yml --atomic
+```
+
+# Postgres exporter
+```bash
+helm install postgres-exporter stable/prometheus-postgres-exporter -f ./postgres-exporter.yml
+```
+
+# Grafana dashboard postgres
+```bash
+kubectl apply -f ./psql-grafana.yml
+```
+
+# Uninstall
+```bash
+kubectl delete -f ./stresstest.yml
+helm uninstall postgres-exporter
+helm uninstall nginx
+helm uninstall myapp
+helm uninstall prom
+```

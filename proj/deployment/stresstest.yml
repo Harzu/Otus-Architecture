@@ -17,7 +17,7 @@ spec:
             - |
               while true
               do
-              ab -n 20 -c 5 http://192.168.64.2:31871/users
+              ab -n 20 -c 5 -H "Host: otus-hw.test" http://192.168.64.2:80/otusapp/users
               sleep 3
               done
   backoffLimit: 3
