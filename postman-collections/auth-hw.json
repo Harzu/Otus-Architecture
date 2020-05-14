@@ -1,0 +1,586 @@
+{
+	"info": {
+		"_postman_id": "c3f8f74a-128d-4a76-b0b8-6f3a34dc4e51",
+		"name": "otus-auth-hw",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register 1 User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3bbdc82e-40ad-4d08-9d40-990ab35cdb45",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"firstUserEmail\", pm.collectionVariables.get(\"email\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "84e2783a-61dc-4e2c-a61e-cd193e0d8ca4",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 user info without login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7b0f1bc4-fe0a-4d50-8758-ee01df4eb7e1",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Email",
+						"value": "ilyashvy@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-First-Name",
+						"value": "Ilya",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Last-Name",
+						"value": "Shvyryalkin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseUrl}}/users/me"
+			},
+			"response": []
+		},
+		{
+			"name": "Login 1 User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c9fe1d0-5c42-49b2-946c-64f224ec4e8a",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 user info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3656d562-369d-4531-9547-e0143bd0fbf2",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Email",
+						"value": "ilyashvy@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-First-Name",
+						"value": "Ilya",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Last-Name",
+						"value": "Shvyryalkin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseUrl}}/users/me"
+			},
+			"response": []
+		},
+		{
+			"name": "Update 1 user info",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e6a02e2e-ecd8-4b03-81a9-eb2bb3316743",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))",
+							"pm.collectionVariables.set(\"firstUserEmail\", pm.collectionVariables.get(\"email\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3006d369-c893-4fc9-9a2f-13a664e37ff7",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 user info after update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e9aa18a-358d-4ee0-8594-9cbca11bd846",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Email",
+						"value": "ilyashvy@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-First-Name",
+						"value": "Ilya",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Last-Name",
+						"value": "Shvyryalkin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseUrl}}/users/me"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout 1 user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38e0e566-1cab-45c5-aecd-81aa09616f20",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "Fail get 1 user info after logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d27a1f5-902f-4e7e-b82b-c9b4719949f8",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Email",
+						"value": "ilyashvy@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-First-Name",
+						"value": "Ilya",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Last-Name",
+						"value": "Shvyryalkin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseUrl}}/users/me"
+			},
+			"response": []
+		},
+		{
+			"name": "Register 2 User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "08973558-4de0-4dde-98ae-edcc35e44e8c",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c5265b0-ed26-4ac4-9715-210f58c7446a",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Login 2 User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a32a9506-a062-4b80-9fcb-01223ae2c0b2",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 2 user info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84f5f7ff-df54-45c8-8702-1c85c0f5f9c3",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Email",
+						"value": "ilyashvy@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-First-Name",
+						"value": "Ilya",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Last-Name",
+						"value": "Shvyryalkin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-User-Id",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseUrl}}/users/me"
+			},
+			"response": []
+		},
+		{
+			"name": "Update 1 user info with 2 user auth",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "959f8c52-c2eb-488a-9129-862f7ee2adb0",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
+							"pm.collectionVariables.set(\"email\", pm.collectionVariables.get('firstUserEmail'))",
+							"pm.collectionVariables.set(\"firstName\", pm.variables.replaceIn('{{$randomFirstName}}'))",
+							"pm.collectionVariables.set(\"lastName\", pm.variables.replaceIn('{{$randomLastName}}'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c621b2c-7e1b-4c9e-ad79-e6f8dd836cb8",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"{{email}}\",\n\t\"passwordHash\": \"{{password}}\",\n\t\"firstName\": \"{{firstName}}\",\n\t\"lastName\": \"{{lastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/user"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c8dcfbf7-8c51-4740-bc56-f9e0af5a51a2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "917e6d45-cfb9-43fa-9f32-e3ad8574e7d6",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '') ] = true;",
+					"tests[\"[INFO] Response: \" + responseBody] = true;"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6e9d9007-1602-40fb-a590-56b3a548fb89",
+			"key": "baseUrl",
+			"value": "http://otus.homework",
+			"type": "string"
+		},
+		{
+			"id": "1b6c0b40-1e15-4b6c-969f-a38c3860b541",
+			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "095f69de-fc56-42b7-a23f-27b21b805ece",
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "c59b32ca-06ec-4795-8645-fc86e30b64a2",
+			"key": "firstName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "12706091-f5a1-443f-be2b-6c62d14aef30",
+			"key": "lastName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "45905ff2-550b-49a8-8606-f5d6c4e7932e",
+			"key": "firstUserEmail",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

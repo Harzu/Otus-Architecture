@@ -1,0 +1,155 @@
+swagger: '2.0'
+info:
+  title: Otus-Arch-homework
+  description: Otus architecture homework 3
+  version: 1.0.0
+paths:
+  /signup:
+    post:
+      summary: Register new user
+      operationId: SignUp
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/InsertOrUpdateUserRequest'
+      responses:
+        201:
+          description: User created
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/FailResponse'
+  /signin:
+    get:
+      summary: Login user
+      operationId: SignIn
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/LoginRequest'
+      responses:
+        200:
+          description: Login success
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/FailResponse'
+  /logout:
+    get:
+      summary: Logout
+      operationId: Logout
+      responses:
+        200:
+          description: User created
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+  /auth:
+    get:
+      summary: Auth user
+      operationId: Auth
+      responses:
+        200:
+          description: User created
+          headers:
+            X-User-Email:
+              type: string
+            X-User-First-Name:
+              type: string
+            X-User-Last-Name:
+              type: string            
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+  /user:
+    put:
+      summary: Update user info
+      operationId: UpdateUser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/InsertOrUpdateUserRequest'
+      responses:
+        200:
+          description: User updated
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/FailResponse'
+
+parameters:
+  LoginRequest:
+    name: Body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - Email
+        - PasswordHash
+      properties:
+        Email:
+          type: string
+          minLength: 1
+        PasswordHash:
+          type: string
+          minLength: 6
+  InsertOrUpdateUserRequest:
+    name: Body
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/UserProperties'
+
+definitions:
+  UserProperties:
+    type: object
+    required:
+      - Email
+      - PasswordHash
+      - FirstName
+      - LastName
+    properties:
+      Email:
+        type: string
+        minLength: 1
+      PasswordHash:
+        type: string
+        minLength: 6
+      FirstName:
+        type: string
+        minLength: 1
+      LastName:
+        type: string
+        minLength: 1
+
+  FailResponse:
+    description: Error response
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: string
+        minLength: 1
+        description: Error message

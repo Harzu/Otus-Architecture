@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: fanyshu/otus-auth-app
+
+service:
+  type: ClusterIP
+  port: 8000
