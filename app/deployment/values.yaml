@@ -6,3 +6,8 @@ image:
 service:
   type: ClusterIP
   port: 8000
+
+authService:
+  name: myapp-api
+  namespace: default
+  port: 8000

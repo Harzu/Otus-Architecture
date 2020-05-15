@@ -1,6 +1,6 @@
 # Prerun
 
-**HOSTNAME** - otus.homework
+**HOSTNAME** - arch.homework
 add etc/hosts INGRESS IP = HOSTNAME
 
 Start minikube and enable ingress

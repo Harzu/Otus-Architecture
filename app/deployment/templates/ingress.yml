@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   name: myapp
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: "http://myapp-api.default.svc.cluster.local:8000/auth"
+    nginx.ingress.kubernetes.io/auth-url: "http://{{ .Values.authService.name }}.{{ .Values.authService.namespace }}.svc.cluster.local:{{ .Values.authService.port }}/auth"
     nginx.ingress.kubernetes.io/auth-signin: "http://$host/signin"
     nginx.ingress.kubernetes.io/auth-response-headers: "X-User-Email,X-User-First-Name,X-User-Last-Name"
 spec:
   rules:
-  - host: otus.homework
+  - host: arch.homework
     http:
       paths:
       - backend:

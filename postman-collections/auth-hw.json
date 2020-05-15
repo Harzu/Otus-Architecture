@@ -546,37 +546,37 @@
 	],
 	"variable": [
 		{
-			"id": "6e9d9007-1602-40fb-a590-56b3a548fb89",
+			"id": "59d4ab17-5c43-4271-962f-fd560419bfb3",
 			"key": "baseUrl",
-			"value": "http://otus.homework",
+			"value": "http://arch.homework",
 			"type": "string"
 		},
 		{
-			"id": "1b6c0b40-1e15-4b6c-969f-a38c3860b541",
+			"id": "f41ead40-a32e-4bbe-a451-9e143f1db921",
 			"key": "email",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "095f69de-fc56-42b7-a23f-27b21b805ece",
+			"id": "a1731b52-0d20-4030-bc65-09233ebd4387",
 			"key": "password",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "c59b32ca-06ec-4795-8645-fc86e30b64a2",
+			"id": "e964acb7-6eed-4899-8eb7-42067b85f906",
 			"key": "firstName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "12706091-f5a1-443f-be2b-6c62d14aef30",
+			"id": "46e6f9ee-f1cd-486f-8099-5f1361c88884",
 			"key": "lastName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "45905ff2-550b-49a8-8606-f5d6c4e7932e",
+			"id": "80b7fcd2-6572-40ab-8102-277b562aafe2",
 			"key": "firstUserEmail",
 			"value": "",
 			"type": "string"
