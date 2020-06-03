@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: fanyshu/otus-auth-app
+
+service:
+  type: ClusterIP
+  port: 8000
+
+authService:
+  name: myapp-api
+  namespace: default
+  port: 8000
