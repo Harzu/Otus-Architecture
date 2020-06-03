@@ -1,4 +1,4 @@
-# Prer-un
+# Pre-run
 
 **HOSTNAME** - arch.homework
 add etc/hosts INGRESS IP = HOSTNAME
