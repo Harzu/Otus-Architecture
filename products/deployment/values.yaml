@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: fanyshu/otus-auth-api
+
+service:
+  type: ClusterIP
+  port: 8000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "password"
+  postgresqlDatabase: "postgres_homework"
+  service:
+    port: "5432"
