@@ -11,9 +11,9 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/gorilla/mux"
 
-	"otus-auth/app"
-	"otus-auth/app/constants"
-	"otus-auth/app/generated/restapi/operations"
+	"otus-products/app"
+	"otus-products/app/constants"
+	"otus-products/app/generated/restapi/operations"
 )
 
 var srv app.Service

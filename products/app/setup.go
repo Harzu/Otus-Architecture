@@ -1,14 +1,14 @@
 package app
 
 import (
-	"otus-auth/app/config"
-	"otus-auth/app/constants"
-	"otus-auth/app/generated/restapi/operations"
-	"otus-auth/app/handlers/products"
-	"otus-auth/app/repositories"
-	"otus-auth/app/system/database/psql"
-	"otus-auth/app/system/database/redis"
-	"otus-auth/app/system/healthcheck"
+	"otus-products/app/config"
+	"otus-products/app/constants"
+	"otus-products/app/generated/restapi/operations"
+	"otus-products/app/handlers/products"
+	"otus-products/app/repositories"
+	"otus-products/app/system/database/psql"
+	"otus-products/app/system/database/redis"
+	"otus-products/app/system/healthcheck"
 )
 
 type Service struct {

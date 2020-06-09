@@ -1,4 +1,5 @@
-DOCKER_NAME="fanyshu/otus-auth-api:v2"
+DOCKER_NAME="fanyshu/otus-cache-hw"
+VERSION="v0.1"
 
 clean:
 	@echo "Removing generated files..."
@@ -12,8 +13,12 @@ generate:
 	@echo "Generating server..."
 	@swagger generate server -f ./swagger/swagger.yml -t ./app/generated --exclude-main
 
-build-docker:
-	@docker build -t $(DOCKER_NAME) .
+build-docker: build-docker-app build-docker-migrations
+build-docker-app:
+	@docker build -f ./Dockerfile -t "$(DOCKER_NAME):$(VERSION)" .
+build-docker-migrations:
+	@docker build -f ./migrations.Dockerfile -t "$(DOCKER_NAME)-migrations:$(VERSION)" .
 
 push-docker:
-	@docker push $(DOCKER_NAME)
+	@docker push "$(DOCKER_NAME):$(VERSION)"
+	@docker push "$(DOCKER_NAME)-migrations:$(VERSION)"

@@ -11,20 +11,4 @@ spec:
       - backend:
           serviceName: myapp-api
           servicePort: {{ .Values.service.port }}
-        path: /signin
-      - backend:
-          serviceName: myapp-api
-          servicePort: {{ .Values.service.port }}
-        path: /signup
-      - backend:
-          serviceName: myapp-api
-          servicePort: {{ .Values.service.port }}
-        path: /logout
-      - backend:
-          serviceName: myapp-api
-          servicePort: {{ .Values.service.port }}
-        path: /user
-      - backend:
-          serviceName: myapp-api
-          servicePort: {{ .Values.service.port }}
-        path: /auth
+        path: /products

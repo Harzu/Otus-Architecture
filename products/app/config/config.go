@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"otus-auth/app/system/database/redis"
+	"otus-products/app/system/database/redis"
 
 	"github.com/vrischmann/envconfig"
 )

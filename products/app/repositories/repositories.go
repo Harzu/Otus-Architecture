@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"otus-auth/app/repositories/products"
-	"otus-auth/app/system/database/psql"
+	"otus-products/app/repositories/products"
+	"otus-products/app/system/database/psql"
 )
 
 type Repositories struct {

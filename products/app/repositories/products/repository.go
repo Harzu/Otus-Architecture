@@ -2,8 +2,8 @@ package products
 
 import (
 	"fmt"
-	"otus-auth/app/entities"
-	"otus-auth/app/system/database/psql"
+	"otus-products/app/entities"
+	"otus-products/app/system/database/psql"
 
 	"github.com/jmoiron/sqlx"
 )

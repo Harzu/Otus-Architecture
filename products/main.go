@@ -2,10 +2,10 @@ package main
 
 import (
 	"log"
-	"otus-auth/app/config"
-	"otus-auth/app/constants"
-	"otus-auth/app/generated/restapi"
-	"otus-auth/app/generated/restapi/operations"
+	"otus-products/app/config"
+	"otus-products/app/constants"
+	"otus-products/app/generated/restapi"
+	"otus-products/app/generated/restapi/operations"
 
 	"github.com/go-openapi/loads"
 )

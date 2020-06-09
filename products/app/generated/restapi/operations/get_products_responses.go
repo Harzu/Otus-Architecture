@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	models "otus-auth/app/generated/models"
+	models "otus-products/app/generated/models"
 )
 
 // GetProductsOKCode is the HTTP code returned for type GetProductsOK

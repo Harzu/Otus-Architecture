@@ -3,8 +3,8 @@ package healthcheck
 import (
 	"encoding/json"
 	"net/http"
-	"otus-auth/app/system/database/psql"
-	"otus-auth/app/system/database/redis"
+	"otus-products/app/system/database/psql"
+	"otus-products/app/system/database/redis"
 )
 
 type HealthCheck struct {

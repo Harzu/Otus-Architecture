@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: fanyshu/otus-auth-api
+  repository: fanyshu/otus-cache-hw
 
 service:
   type: ClusterIP
