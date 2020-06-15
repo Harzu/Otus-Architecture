@@ -1,5 +1,31 @@
 DOCKER_NAME="fanyshu/otus-cache-hw"
-VERSION="v0.1"
+VERSION="v0.7"
+
+all: check-need-bin clean generate build-docker push-docker
+
+check-need-bin:
+	. ./scripts/check-bin
+
+install-dep: check-need-bin
+	@helm repo add bitnami https://charts.bitnami.com/bitnami
+	@helm dependency update ./deployment
+
+start-dev: check-need-bin
+	@minikube start --cpus=2 --memory=6g
+	@minikube addons enable ingress
+	@kubectl delete validatingwebhookconfiguration ingress-nginx-admission
+	@helm install myapp ./deployment
+	@watch kubectl get all
+
+run-dev:
+	@helm install myapp ./deployment
+
+stop-dev:
+	@helm delete myapp
+
+shutdown: stop-dev
+	@minikube stop
+	@minikube delete
 
 clean:
 	@echo "Removing generated files..."

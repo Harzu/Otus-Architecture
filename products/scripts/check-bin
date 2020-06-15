@@ -1,0 +1,27 @@
+#! /bin/bash
+
+function exists_bin()
+{
+    if [ -x "$(command -v $1)" ]; then
+        $1 version
+    else
+        echo "need install $1!"
+        exit 1
+    fi
+}
+
+function exists_watch()
+{
+    if [ -x "$(which watch)" ]; then
+        which watch
+    else
+        echo "need install watch"
+        exit 1
+    fi
+}
+
+exists_bin docker
+exists_bin swagger
+exists_bin helm
+exists_bin kubectl
+exists_watch

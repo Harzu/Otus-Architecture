@@ -14,3 +14,9 @@ postgresql:
   postgresqlDatabase: "postgres_homework"
   service:
     port: "5432"
+
+redis:
+  enabled: true
+  usePassword: false
+  cluster:
+    enabled: false

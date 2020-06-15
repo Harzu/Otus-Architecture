@@ -4,7 +4,11 @@ metadata:
   name: app-api-config
 data:
   HW_HTTP_BIND_PORT: "8000"
+  HW_REDIS_URL: "myapp-redis-master:6379"
+  HW_REDIS_ENABLED: "true"
   POSTGRES_DB: "postgres_homework"
+  POSTGRESS_HOST: "{{ .Chart.Name }}-postgresql"
+  POSTGRESS_PORT: "{{ .Values.postgresql.service.port }}"
 ---
 apiVersion: v1
 kind: Secret
@@ -12,6 +16,6 @@ metadata:
   name: app-api-secret
 type: Opaque
 data:
-  HW_DBSN: aG9zdD1teWFwcC1hcGktcG9zdGdyZXNxbCBwb3J0PTU0MzIgdXNlcj1wb3N0Z3JlcyBwYXNzd29yZD1wYXNzd29yZCBkYm5hbWU9cG9zdGdyZXNfaG9tZXdvcmsgc3NsbW9kZT1kaXNhYmxlIGNvbm5lY3RfdGltZW91dD01IGJpbmFyeV9wYXJhbWV0ZXJzPXllcw==
-  DB_URI: cG9zdGdyZXNxbDovL215YXBwLWFwaS1wb3N0Z3Jlc3FsL3Bvc3RncmVzX2hvbWV3b3JrP3VzZXI9cG9zdGdyZXMmcGFzc3dvcmQ9cGFzc3dvcmQ=
+  HW_DBSN: aG9zdD1teWFwcC1wb3N0Z3Jlc3FsIHBvcnQ9NTQzMiB1c2VyPXBvc3RncmVzIHBhc3N3b3JkPXBhc3N3b3JkIGRibmFtZT1wb3N0Z3Jlc19ob21ld29yayBzc2xtb2RlPWRpc2FibGUgY29ubmVjdF90aW1lb3V0PTUgYmluYXJ5X3BhcmFtZXRlcnM9eWVz
+  DB_URI: cG9zdGdyZXNxbDovL215YXBwLXBvc3RncmVzcWwvcG9zdGdyZXNfaG9tZXdvcms/dXNlcj1wb3N0Z3JlcyZwYXNzd29yZD1wYXNzd29yZA==
   POSTGRES_PASSWORD: cGFzc3dvcmQ=
