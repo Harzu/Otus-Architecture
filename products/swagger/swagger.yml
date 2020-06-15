@@ -1,0 +1,84 @@
+swagger: '2.0'
+info:
+  title: Otus-Arch-homework
+  description: Otus architecture homework cache API
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      summary: Search products by params
+      operationId: GetProducts
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/ETag'
+        - $ref: '#/parameters/GetProductsRequest'
+      responses:
+        200:
+          description: Get products success
+          headers:
+            ETag:
+              type: string
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Products'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/FailResponse'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/FailResponse'
+
+parameters:
+  ETag:
+    name: Etag
+    in: header
+    required: false
+    type: string
+  GetProductsRequest:
+    name: Body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - limit
+        - type
+      properties:
+        limit:
+          type: integer
+          minimum: 1
+        type:
+          type: string
+          minLength: 1
+
+definitions:
+  FailResponse:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: string
+        minLength: 1
+  Products:
+    type: object
+    required:
+      - type
+      - name
+      - price
+    properties:
+      type:
+        type: string
+        minLength: 1
+      name:
+        type: string
+        minLength: 1
+      price:
+        type: integer
+        minimum: 0

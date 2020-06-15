@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: fanyshu/otus-cache-hw
+
+service:
+  type: ClusterIP
+  port: 8000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "password"
+  postgresqlDatabase: "postgres_homework"
+  service:
+    port: "5432"
+
+redis:
+  enabled: true
+  usePassword: false
+  cluster:
+    enabled: false

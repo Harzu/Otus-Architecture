@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "bf8fbb58-2d2a-49ec-a65f-f6ea49df443e",
+		"name": "OTUS-Cache",
+		"description": "Otus homework by use cache",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get products without cache tests",
+			"item": [
+				{
+					"name": "Type -  mobile, Limit - 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ae961dc-381d-405f-9024-9d7085dba3bd",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(1)",
+									"    pm.expect(jsonData[0].type).to.eql(\"mobile\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile\",\n\t\"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Type - mobile, Limit - 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "68fb8224-803a-4887-aec9-c2158912085b",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(5)",
+									"    for (let i = 0; i < 5; i++) {",
+									"        pm.expect(jsonData[i].type).to.eql(\"mobile\")",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile\",\n\t\"limit\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Type - laptop, Limit - 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "361d40af-d94d-43bd-9650-8f5526bfbcd8",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(3)",
+									"    for (let i = 0; i < 3; i++) {",
+									"        pm.expect(jsonData[i].type).to.eql(\"laptop\")",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"laptop\",\n\t\"limit\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Type - laptop, Limit - 8",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6933926-f56c-4bd7-8c5a-bafb72097425",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(8)",
+									"    for (let i = 0; i < 3; i++) {",
+									"        pm.expect(jsonData[i].type).to.eql(\"laptop\")",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"laptop\",\n\t\"limit\": 8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get products with cache tests",
+			"item": [
+				{
+					"name": "Cold cache (type = mobile, limit = 1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8517eab-4587-429c-961a-6f9bcf0de579",
+								"exec": [
+									"pm.test(\"Status test (cold cache)\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"ETag response exists\", function () {",
+									"    etag = pm.response.headers.get(\"Etag\")",
+									"    pm.collectionVariables.set(\"Etag\", etag);",
+									"",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(1)",
+									"    pm.expect(jsonData[0].type).to.eql(\"mobile\")",
+									"    pm.expect(etag).not.to.eql(undefined)",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile\",\n\t\"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Etag  exists (cached) (type = mobile, limit = 1)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "73839185-2a92-4b99-bc18-2c0ea7612277",
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b6bc18d-d484-4290-9b2d-30a30e4b7480",
+								"exec": [
+									"pm.test(\"Status test (cold cache)\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"ETag response exists\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(1)",
+									"    pm.expect(jsonData[0].type).to.eql(\"mobile\")",
+									"})",
+									"",
+									"etag = pm.response.headers.get(\"Etag\")",
+									"pm.collectionVariables.set(\"Etag\", etag);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Etag",
+								"value": "{{Etag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile\",\n\t\"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Etag exists (non-cached) (type = mobile, limit = 3)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04d562c9-f783-491c-bc11-de71a14de048",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(3)",
+									"    for (let i = 0; i < 3; i++) {",
+									"        pm.expect(jsonData[i].type).to.eql(\"mobile\")",
+									"    }",
+									"})",
+									"",
+									"etag = pm.response.headers.get(\"Etag\")",
+									"pm.collectionVariables.set(\"Etag\", etag);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Etag",
+								"value": "{{Etag}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile\",\n\t\"limit\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Etag exists (non-cached) (type = laptop, limit = 3)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37d46e54-57c6-48b3-8d40-95a546f33952",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body test\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.eql(3)",
+									"    for (let i = 0; i < 3; i++) {",
+									"        pm.expect(jsonData[i].type).to.eql(\"laptop\")",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Etag",
+								"value": "Etag",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"laptop\",\n\t\"limit\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/products"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "HealthCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0abcbe8-490f-4d73-8a2a-f626eedff197",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response check test\", function () {",
+							"    var jsonData = pm.response.json()",
+							"    pm.expect(jsonData.DBAvailable).to.eql(true)",
+							"    pm.expect(jsonData.RedisAvailable).to.eql(true)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/health/check"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5c460ef1-8395-4652-850b-f5d17d544352",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "43a32ab7-edb6-4d82-bef1-f15cccbe5542",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '') ] = true;",
+					"tests[\"[INFO] Response: \" + responseBody] = true;"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "12cf6fb0-a46d-4a99-9a0d-e6effbe6e388",
+			"key": "baseUrl",
+			"value": "http://arch.homework",
+			"type": "string"
+		},
+		{
+			"id": "b1c80179-8270-4424-a147-050b90968d0b",
+			"key": "Etag",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

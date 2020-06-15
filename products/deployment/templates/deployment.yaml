@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "myapp.fullname" . }}
+  labels:
+    {{- include "myapp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "myapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "myapp.selectorLabels" . | nindent 8 }}
+    spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres
+          command: ['sh', '-c', 
+            'until pg_isready -h $POSTGRESS_HOST -p $POSTGRESS_PORT; 
+            do echo waiting for database; sleep 2; done;']
+          env:
+            - name: POSTGRESS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRESS_HOST
+                  name: app-api-config
+            - name: POSTGRESS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRESS_PORT
+                  name: app-api-config
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:v{{ .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: HW_HTTP_BIND_PORT
+              valueFrom:
+                configMapKeyRef:
+                    key: HW_HTTP_BIND_PORT
+                    name: app-api-config
+            - name: HW_REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                    key: HW_REDIS_URL
+                    name: app-api-config
+            - name: HW_REDIS_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                    key: HW_REDIS_ENABLED
+                    name: app-api-config
+            - name: HW_DBSN
+              valueFrom:
+                secretKeyRef:
+                  key: HW_DBSN
+                  name: app-api-secret
+          readinessProbe:
+            httpGet:
+              path: /health/check
+              port: http
+            initialDelaySeconds: 4
+            periodSeconds: 3

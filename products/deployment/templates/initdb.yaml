@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-db
+spec:
+  template:
+    metadata:
+      name: init-db
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: check-db-ready
+          image: postgres
+          command: ['sh', '-c', 
+            'until pg_isready -h $POSTGRESS_HOST -p $POSTGRESS_PORT; 
+            do echo waiting for database; sleep 2; done;']
+          env:
+            - name: POSTGRESS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRESS_HOST
+                  name: app-api-config
+            - name: POSTGRESS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRESS_PORT
+                  name: app-api-config
+      containers:
+      containers:
+        - name: migrations
+          env:
+            - name: GOOSE_DRIVER
+              value: postgres
+            - name: GOOSE_DBSTRING
+              valueFrom:
+                secretKeyRef:
+                  key: HW_DBSN
+                  name: app-api-secret
+          image:  "{{ .Values.image.repository }}-migrations:v{{ .Chart.AppVersion }}"
+          command: ["goose", "--dir", "/tmp/migrations", "up"]
+  backoffLimit: 3

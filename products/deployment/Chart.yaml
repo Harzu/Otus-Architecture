@@ -1,0 +1,22 @@
+apiVersion: v2
+name: myapp
+description: Cache homework
+
+type: application
+
+version: 0.1.0
+appVersion: 0.7
+
+dependencies:
+  - name: postgresql
+    version: 8.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+    tags:
+      - services-database
+  - name: redis
+    version: 10.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+    tags:
+      - services-cache
