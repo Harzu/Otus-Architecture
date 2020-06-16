@@ -14,6 +14,7 @@ import (
 	"otus-products/app"
 	"otus-products/app/constants"
 	"otus-products/app/generated/restapi/operations"
+	"otus-products/app/services/metrics"
 )
 
 var srv app.Service
@@ -46,6 +47,7 @@ func setupCustomRoutes(next http.Handler) http.Handler {
 	router := mux.NewRouter()
 
 	router.Handle(constants.HealthCheckURL, http.HandlerFunc(srv.HealthCheck.Check))
+	router.Handle(constants.MetricsURI, metrics.NewMetricsHandler(srv.Services.Metrics.Metrics()))
 	router.NotFoundHandler = next
 
 	return router

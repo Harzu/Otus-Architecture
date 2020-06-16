@@ -7,6 +7,16 @@ service:
   type: ClusterIP
   port: 8000
 
+metrics:
+  serviceMonitor:
+    enabled: true
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+
 postgresql:
   enabled: true
   postgresqlUsername: "postgres"

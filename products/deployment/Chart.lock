@@ -5,5 +5,8 @@ dependencies:
 - name: redis
   repository: https://charts.bitnami.com/bitnami
   version: 10.7.1
-digest: sha256:0f1f9098a39bcbe8dc0bf585da43ca894fca9d4497637889eb4a9fb6326e960a
-generated: "2020-06-15T14:43:01.250865817+03:00"
+- name: prometheus-operator
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 8.x.x
+digest: sha256:7bd93b74aeb5e445ded48ec679323c8b030694004612e5554a562a6726e40396
+generated: "2020-06-15T20:15:41.556290069+03:00"

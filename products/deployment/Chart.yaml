@@ -1,11 +1,11 @@
 apiVersion: v2
-name: myapp
+name: products-service
 description: Cache homework
 
 type: application
 
-version: 0.1.0
-appVersion: 0.7
+version: 0.2.0
+appVersion: 0.8
 
 dependencies:
   - name: postgresql
@@ -20,3 +20,9 @@ dependencies:
     condition: redis.enabled
     tags:
       - services-cache
+  - name: prometheus-operator
+    version: 8.x.x
+    repository: https://kubernetes-charts.storage.googleapis.com
+    condition: prometheus.enabled
+    tags:
+      - services-monitoring

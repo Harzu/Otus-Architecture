@@ -9,10 +9,14 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: myapp
+          serviceName: "myapp-{{ .Chart.Name }}"
           servicePort: {{ .Values.service.port }}
         path: /products
       - backend:
-          serviceName: myapp
+          serviceName: "myapp-{{ .Chart.Name }}"
           servicePort: {{ .Values.service.port }}
         path: /health/check
+      - backend:
+          serviceName: "myapp-{{ .Chart.Name }}"
+          servicePort: {{ .Values.service.port }}
+        path: /metrics

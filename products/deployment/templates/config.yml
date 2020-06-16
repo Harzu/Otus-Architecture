@@ -7,7 +7,8 @@ data:
   HW_REDIS_URL: "myapp-redis-master:6379"
   HW_REDIS_ENABLED: "true"
   POSTGRES_DB: "postgres_homework"
-  POSTGRESS_HOST: "{{ .Chart.Name }}-postgresql"
+  POSTGRESS_HOST: "myapp-postgresql"
+  # POSTGRESS_HOST: "{{ .Chart.Name }}-postgresql"
   POSTGRESS_PORT: "{{ .Values.postgresql.service.port }}"
 ---
 apiVersion: v1

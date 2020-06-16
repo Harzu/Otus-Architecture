@@ -6,6 +6,7 @@ import (
 	"otus-products/app/generated/restapi/operations"
 	"otus-products/app/handlers/products"
 	"otus-products/app/repositories"
+	"otus-products/app/services"
 	"otus-products/app/system/database/psql"
 	"otus-products/app/system/database/redis"
 	"otus-products/app/system/healthcheck"
@@ -13,6 +14,7 @@ import (
 
 type Service struct {
 	products.ProductsHandler
+	Services        *services.Services
 	HealthCheck     healthcheck.HealthCheck
 	PostgresClient  psql.Repository
 	RedisRepository redis.Repository
@@ -39,6 +41,7 @@ func (sc *Service) ConfigureService() error {
 		return err
 	}
 
+	sc.Services = services.New()
 	sc.PostgresClient = postgresClient
 	sc.RedisRepository = redisRepo
 	sc.Repositories = repositories.New(sc.PostgresClient)

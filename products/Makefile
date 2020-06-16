@@ -1,5 +1,5 @@
 DOCKER_NAME="fanyshu/otus-cache-hw"
-VERSION="v0.7"
+VERSION="v0.8"
 
 all: check-need-bin clean generate build-docker push-docker
 
